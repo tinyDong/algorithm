@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class quickSort {
-    public static void quickSortTest(Integer[] arr,Integer start,Integer end){
-        if (start>end){
+    public static void quickSortTest(int[] arr,Integer low,Integer high){
+        if (low>high){
             return;
         }
-        int i=start,j=end;
-        int base = arr[start];
+        int i=low,j=high;
+        int base=arr[low];
         while (i<j){
             while (i<j&&base<arr[j]){
                 j--;
@@ -22,21 +22,20 @@ public class quickSort {
                 swap(arr,i,j);
             }
         }
-        swap(arr,start,i);
-        quickSortTest(arr,start,i-1);
-        quickSortTest(arr,i+1,end);
-
+        swap(arr,low,i);
+        quickSortTest(arr,low,i-1);
+        quickSortTest(arr,i+1,high);
     }
 
-    private static void swap(Integer[] arr, int i, int j) {
-        int tmep=arr[i];
-        arr[i]=arr[j];
-        arr[j]=tmep;
+    public static void swap(int[] arr,int start,int end){
+        int temp=arr[start];
+        arr[start]=arr[end];
+        arr[end]=temp;
     }
-
     public static void main(String[] args) {
-        Integer[] testArr = new Integer[]{0, 1, 13, 25, 36, 17, 18, 2};
+        int[] testArr = new int[]{ 3,36, 25, 10, 1, 18,17,  21};
         quickSortTest(testArr,0,testArr.length-1);
         System.out.println(Arrays.toString(testArr));
+        //
     }
 }
