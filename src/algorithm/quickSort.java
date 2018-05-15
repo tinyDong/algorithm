@@ -6,33 +6,32 @@ import java.util.Arrays;
 
 public class quickSort {
     public static void quickSortTest(Integer[] arr,Integer start,Integer end){
-        System.out.println("result="+Arrays.toString(arr));
-        int base=arr[start];
-        int i =start;
-        int j =end;
-        if (j>i){
-            while (arr[i]<base&&i<end){
-                i++;
-            }
-            while (base<arr[j]&&j>start){
+        if (start>end){
+            return;
+        }
+        int i=start,j=end;
+        int base = arr[start];
+        while (i<j){
+            while (i<j&&base<arr[j]){
                 j--;
+            }
+            while (i<j&&base>=arr[i]){
+                i++;
             }
             if (i<j){
-                int temp=arr[i];
-                arr[i]=arr[j];
-                arr[j]=temp;
-                i++;
-                j--;
-            }
-
-            if (i<end){
-                quickSortTest(arr,i+1,end);
-            }
-
-            if (j>start){
-                quickSortTest(arr,start,j-1);
+                swap(arr,i,j);
             }
         }
+        swap(arr,start,i);
+        quickSortTest(arr,start,i-1);
+        quickSortTest(arr,i+1,end);
+
+    }
+
+    private static void swap(Integer[] arr, int i, int j) {
+        int tmep=arr[i];
+        arr[i]=arr[j];
+        arr[j]=tmep;
     }
 
     public static void main(String[] args) {
