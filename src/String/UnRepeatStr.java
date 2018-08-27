@@ -13,24 +13,36 @@ package String;
 //        给定 "pwwkew" ，最长子串是 "wke" ，长度是3。请注意答案必须是一个子串，"pwke" 是 子序列  而不是子串。
 
 
-
-
-
-
-
-
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class UnRepeatStr {
-    public void find(){
-
-    }
 
     public static void main(String[] args) {
-        System.out.println(new UnRepeatStr().lengthOfLongestSubstring("axcbbcbcabx"));
+        System.out.println(new UnRepeatStr().lengthOfLongestSubstring("axcebpipbcbcabx"));
     }
 
     private int lengthOfLongestSubstring(String str) {
+        if (str==null||str.length()==0){
+            return 0;
+        }
+
+        char[] chars=str.toCharArray();
+        HashMap<Object,Boolean> map = new HashMap();
+        int start =0 ,end =start;
+        String subStr="";
+
+        while (start<chars.length){
+            while (end<chars.length&&(map.get(chars[end])==null || !map.get(chars[end]))){
+                map.put(chars[end],true);
+                end++;
+                subStr=subStr.length()>str.substring(start,end).length()?subStr:str.substring(start,end);
+            }
+            map.remove(chars[start]);
+            start++;
+        }
+        System.out.println(subStr+"==="+subStr.length());
         return 0;
     }
 
