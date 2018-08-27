@@ -1,8 +1,6 @@
 package String;
 
 
-import java.util.ArrayList;
-
 //3. 无重复字符的最长子串
 //给定一个字符串，找出不含有重复字符的最长子串的长度。
 //
@@ -14,36 +12,34 @@ import java.util.ArrayList;
 //
 //        给定 "pwwkew" ，最长子串是 "wke" ，长度是3。请注意答案必须是一个子串，"pwke" 是 子序列  而不是子串。
 
-public class String3 {
+
+
+
+
+
+
+
+
+
+public class UnRepeatStr {
     public void find(){
 
     }
 
-
     public static void main(String[] args) {
-        System.out.println(new String3().lengthOfLongestSubstring("axcbbcbcabx"));
+        System.out.println(new UnRepeatStr().lengthOfLongestSubstring("axcbbcbcabx"));
     }
 
     private int lengthOfLongestSubstring(String str) {
-        if (str==null||str.length()==0){
-            return 0;
-        }
-
-        boolean[] chars= new boolean[256];
-        int start = 0, end=0 , maxLength = 0;
-
-        while (start<str.length()){
-
-            while (end<str.length()&&!chars[str.charAt(end)]){
-                chars[str.charAt(end)]=true;
-                maxLength=Math.max(maxLength,end-start+1);
-                end++;
-            }
-            chars[str.charAt(start)]=false;
-            start++;
-        }
-        return maxLength;
+        return 0;
     }
+
+
+
+
+
+
+
 
 
 

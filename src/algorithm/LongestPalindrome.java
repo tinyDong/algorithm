@@ -2,7 +2,7 @@ package algorithm;
 //最长回文串
 public class LongestPalindrome {
 	public static void main(String[] args) {
-		String str = "abcddcc";
+		String str = "abcddddddcc";
 		String result = getPalindrome(str);
 		System.out.println(result);
 	}
