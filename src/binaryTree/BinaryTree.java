@@ -64,22 +64,24 @@ public class BinaryTree {
             preOrder(root.rightChild);
         }
     }
+
+//    *           A
+//    *     B          C
+//    *  D     E            F
     //前序遍历的非递归实现
     public void nonRecPreOrder(TreeNode root) {
         if (root==null)return;
-       Stack<TreeNode> stack = new Stack<>();
-
-       stack.push(root);
-       while (!stack.isEmpty()){
-           TreeNode temp = stack.pop();
-           if (temp!=null){
-               visited(temp);
-               stack.push(temp.rightChild);
-               stack.push(temp.leftChild);
-           }
-       }
-
-
+        TreeNode temp = root;
+        Stack<TreeNode> stack = new Stack<>();
+        while (temp!=null||!stack.isEmpty()){
+            while (temp!=null){
+                stack.push(temp);
+                visited(temp);
+                temp = temp.leftChild;
+            }
+            temp = stack.pop();
+            temp=temp.rightChild;
+        }
     }
 
     //中序遍历
@@ -90,20 +92,22 @@ public class BinaryTree {
             midOrder(root.rightChild);
         }
     }
-
+//    *           A
+//     *     B          C
+//     *  D     E            F
     //中序遍历的非递归实现
     public void noRecMidOrder(TreeNode root){
         if (root==null)return;
-        Stack<TreeNode> stack = new Stack<>();
         TreeNode temp = root;
-        while (temp!=null||!stack.isEmpty()){
+        Stack<TreeNode> stack = new Stack<>();
+        while (temp!=null || !stack.isEmpty()){
             while (temp!=null){
                 stack.push(temp);
-                temp=temp.leftChild;
+                temp = temp.leftChild;
             }
             temp = stack.pop();
             visited(temp);
-            temp=temp.rightChild;
+            temp = temp.rightChild;
         }
 
     }
@@ -129,26 +133,23 @@ public class BinaryTree {
      * @author WWX
      */
     public void nonRecPostOrder(TreeNode root){
+        if (root==null) return;
         Stack<TreeNode> stack = new Stack<>();
-
-        Stack<TreeNode> outStack = new Stack<>();
-
+        Stack<TreeNode> resultStack = new Stack<>();
         TreeNode temp = root;
-        while (temp != null||!stack.isEmpty()){
+        while (temp!=null||!stack.isEmpty()){
             if (temp!=null){
                 stack.push(temp);
-                outStack.push(temp);
+                resultStack.push(temp);
                 temp = temp.rightChild;
             }else {
                 temp = stack.pop();
-                temp = temp.leftChild;
+                temp =temp.leftChild;
             }
         }
-
-        while (!outStack.isEmpty()){
-            visited(outStack.pop());
+        while (!resultStack.isEmpty()){
+            visited(resultStack.pop());
         }
-
     }
 
 
@@ -157,10 +158,12 @@ public class BinaryTree {
         bT.createBinaryTree(bT.root);
 //        bT.preOrder(bT.root);
 //        System.out.println("========");
-
 //        bT.nonRecPreOrder(bT.root);
+//
 //        bT.midOrder(bT.root);
+//        System.out.println("========");
 //        bT.noRecMidOrder(bT.root);
+//
         bT.postOrder(bT.root);
         System.out.println("========");
         bT.nonRecPostOrder(bT.root);
