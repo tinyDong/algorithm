@@ -1,8 +1,6 @@
 package binaryTree;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Stack;
+import java.util.*;
 
 public class BinaryTree {
 
@@ -71,16 +69,16 @@ public class BinaryTree {
     //前序遍历的非递归实现
     public void nonRecPreOrder(TreeNode root) {
         if (root==null)return;
-        TreeNode temp = root;
         Stack<TreeNode> stack = new Stack<>();
-        while (temp!=null||!stack.isEmpty()){
+        TreeNode temp = root;
+        while (temp!= null||!stack.isEmpty()){
             while (temp!=null){
                 stack.push(temp);
                 visited(temp);
                 temp = temp.leftChild;
             }
             temp = stack.pop();
-            temp=temp.rightChild;
+            temp = temp.rightChild;
         }
     }
 
@@ -98,9 +96,9 @@ public class BinaryTree {
     //中序遍历的非递归实现
     public void noRecMidOrder(TreeNode root){
         if (root==null)return;
+        Stack<TreeNode> stack =new Stack<>();
         TreeNode temp = root;
-        Stack<TreeNode> stack = new Stack<>();
-        while (temp!=null || !stack.isEmpty()){
+        while (temp !=null || !stack.isEmpty()){
             while (temp!=null){
                 stack.push(temp);
                 temp = temp.leftChild;
@@ -137,14 +135,14 @@ public class BinaryTree {
         Stack<TreeNode> stack = new Stack<>();
         Stack<TreeNode> resultStack = new Stack<>();
         TreeNode temp = root;
-        while (temp!=null||!stack.isEmpty()){
-            if (temp!=null){
+        while (temp != null || !stack.isEmpty()){
+            if (temp != null){
                 stack.push(temp);
                 resultStack.push(temp);
                 temp = temp.rightChild;
             }else {
                 temp = stack.pop();
-                temp =temp.leftChild;
+                temp = temp.leftChild;
             }
         }
         while (!resultStack.isEmpty()){
@@ -152,22 +150,49 @@ public class BinaryTree {
         }
     }
 
+    public int level(TreeNode root) {
+        if (root == null)
+            return 0;
+        return level(root.leftChild) + 1 > level(root.rightChild) + 1 ? level(root.leftChild) + 1: level(root.rightChild) + 1;
+    }
 
-    public static void main(String[] args) {
+
+    public void layerOrder(TreeNode root){
+        if (root==null){
+            return;
+        }
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        TreeNode temp = root;
+        queue.add(root);
+        while (!queue.isEmpty()){
+            temp = queue.peek();
+            visited(temp);
+            if (temp.leftChild!=null){
+                queue.add(temp.leftChild);
+            }
+            if (temp.rightChild !=null){
+                queue.add(temp.rightChild);
+            }
+            queue.poll();
+        }
+    }
+
+
+        public static void main(String[] args) {
         BinaryTree bT=new BinaryTree();
         bT.createBinaryTree(bT.root);
 //        bT.preOrder(bT.root);
 //        System.out.println("========");
 //        bT.nonRecPreOrder(bT.root);
-//
+
 //        bT.midOrder(bT.root);
 //        System.out.println("========");
 //        bT.noRecMidOrder(bT.root);
 //
-        bT.postOrder(bT.root);
-        System.out.println("========");
-        bT.nonRecPostOrder(bT.root);
-
-
+//        bT.postOrder(bT.root);
+//        System.out.println("========");
+//        bT.nonRecPostOrder(bT.root);
+        bT.layerOrder(bT.root);
+//        System.out.println(bT.level(bT.root));
     }
 }
