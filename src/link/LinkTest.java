@@ -36,25 +36,45 @@ public class LinkTest {
 //    求链表的中间结点
 
     public static void main(String[] args) {
-        LinkTest link = new LinkTest();
 
-        createLink(link);
 
-        Node temp = link.header;
-        while (temp!=null){
-            System.out.println(temp.value);
-            temp = temp.next;
+        LinkTest link1 = createLink();
 
-        }
-        int n = 2;
+        LinkTest link2 = createLink1();
+
+//        Node temp = link1.header;
+//        while (temp!=null){
+//            System.out.println(temp.value);
+//            temp = temp.next;
+//
+//        }
+
+        Node temp1 = mergeLink(link1.header,link2.header);
+
+//        int n = 2;
 //        Node temp1 = reserveLink(link.header,n);
 //        Node temp1 =reverse(link.header);
-        Node temp1 = findLastOne(link.header);
+//        Node temp1 = findLastOne(link.header);
         while (temp1!=null){
             System.out.println(temp1.value);
             temp1 = temp1.next;
 
         }
+
+    }
+
+    private static Node mergeLink(Node node1, Node node2) {
+        if (node1 == null) return node2;
+        if (node2 == null) return node1;
+        Node result = null;
+        if (node1.value<=node2.value){
+            result=node1;
+            result.next = mergeLink(node1.next,node2);
+        }else {
+            result = node2;
+            result.next = mergeLink(node2.next,node1);
+        }
+        return result;
 
     }
 
@@ -100,13 +120,14 @@ public class LinkTest {
         return pre;
     }
 
-    private static void createLink(LinkTest link) {
-        Node node1 = link.createNode(3);
-        Node node2 = link.createNode(1);
-        Node node3 = link.createNode(4);
-        Node node4 = link.createNode(9);
-        Node node5 = link.createNode(8);
-        Node node6 = link.createNode(7);
+    private static LinkTest createLink() {
+        LinkTest link = new LinkTest();
+        Node node1 = link.createNode(1);
+        Node node2 = link.createNode(3);
+        Node node3 = link.createNode(5);
+        Node node4 = link.createNode(7);
+        Node node5 = link.createNode(9);
+        Node node6 = link.createNode(11);
 
         link.addNode(node1);
         link.addNode(node2);
@@ -114,6 +135,23 @@ public class LinkTest {
         link.addNode(node4);
         link.addNode(node5);
         link.addNode(node6);
+        return link;
+    }
+    private static LinkTest createLink1() {
+        LinkTest link = new LinkTest();
+        Node node1 = link.createNode(2);
+        Node node2 = link.createNode(4);
+        Node node3 = link.createNode(6);
+        Node node4 = link.createNode(8);
+        Node node5 = link.createNode(10);
+        Node node6 = link.createNode(12);
 
+        link.addNode(node1);
+        link.addNode(node2);
+        link.addNode(node3);
+        link.addNode(node4);
+        link.addNode(node5);
+        link.addNode(node6);
+        return link;
     }
 }
