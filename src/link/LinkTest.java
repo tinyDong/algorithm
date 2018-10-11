@@ -47,8 +47,9 @@ public class LinkTest {
 
         }
         int n = 2;
-        Node temp1 = reserveLink(link.header,n);
+//        Node temp1 = reserveLink(link.header,n);
 //        Node temp1 =reverse(link.header);
+        Node temp1 = findLastOne(link.header);
         while (temp1!=null){
             System.out.println(temp1.value);
             temp1 = temp1.next;
@@ -58,40 +59,45 @@ public class LinkTest {
     }
 
 
-    //非递归
-    public static Node reverse(Node node) {
-        Node prev = null;
-        while (node != null) {
-            Node next = node.next;
-            node.next = prev;
-            prev = node;
-            node = next;
+    // a-b-c-d-e
+    //递归
+    public static Node findLastOne(Node node){
+        Node pre = null;
+        if (node == null||node.next == null) {
+            pre =node;
+        }else {
+            Node temp = findLastOne(node.next);
+            node.next.next=node;
+            node.next=null;
+            pre = temp;
         }
 
-        return prev;
+        return pre;
+    }
+
+
+    //非递归
+    public static Node reverse(Node node) {
+        Node pre= null;
+        while (node!=null){
+            Node temp = node;
+            node = node.next;
+            temp.next=pre;
+            pre=temp;
+        }
+        return pre;
     }
 
     //非递归1
     private static Node reserveLink(Node node, int n) {
-//        Node now = header;
-        Node prev = null;
-        //a-b-c-d-e
-
-        for (int i =0 ;i<n;i++)
-            if (node!=null){
-                Node temp = node;
-                node = node.next;
-                temp.next = prev;
-                prev = temp;
-                if (i==n-1&&prev.next!=null){
-                    Node temp1 =prev;
-                    while (temp1.next!=null){
-                        temp1 =temp1.next;
-                    }
-                    temp1.next=node;
-                }
-            }
-        return prev;
+        Node pre = null;
+        while (node!=null){
+            Node temp = node.next;
+            node.next=pre;
+            pre=node;
+            node = temp;
+        }
+        return pre;
     }
 
     private static void createLink(LinkTest link) {
