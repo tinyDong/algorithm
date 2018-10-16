@@ -50,16 +50,33 @@ public class LinkTest {
 //        Node temp1 = reserveLink(link.header,n);
 //        Node temp1 =reverse(link.header);
 //        Node temp1 = findLastOne(link.header);
-        Node temp1 = findMidNode(link1.header);
-        while (temp1!=null){
+//        Node temp1 = findMidNode(link1.header);
+
+//        printNode(temp1);
+        System.out.println(checkLinkCycle(link1.header));
+
+    }
+
+    private static void printNode(Node temp1){
+                while (temp1!=null){
             System.out.println(temp1.value);
             temp1 = temp1.next;
 
         }
-
     }
 
-    
+    static boolean checkLinkCycle(Node node){
+        Node fast = node;
+        Node slow = node;
+        while (fast!=null&&fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+            if (slow == fast){
+                return true;
+            }
+        }
+        return false;
+    }
 
     //a-b-c-d-e
     private static Node findMidNode(Node node){
@@ -160,6 +177,7 @@ public class LinkTest {
         link.addNode(node3);
         link.addNode(node4);
         link.addNode(node5);
+        node5.next=node1;
 //        link.addNode(node6);
         return link;
     }
