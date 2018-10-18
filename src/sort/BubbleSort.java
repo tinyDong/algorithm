@@ -22,12 +22,15 @@ public class BubbleSort {
         int length = nums.length;
         for (int i = 1; i < length; i++) {
             int value = nums[i];
-            for (int j = i-1; j >=0; j--) {
-                if (value<=nums[j]){
-                    nums[j+1] = nums[j];
-                    nums[j]=value;
+            int j = i-1;
+            for (; j >=0; j--) {
+                if (nums[j]>value){
+                    nums[j+1]=nums[j];
+                }else {
+                    break;
                 }
             }
+            nums[j+1]=value;
         }
     }
 
