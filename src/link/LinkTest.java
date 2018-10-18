@@ -45,22 +45,28 @@ public class LinkTest {
 
         LinkTest link2 = createLink1();
 
+//        Node n1 = link1.header;
+//
+//        Node n2 = link1.header;
+//
+//        n1.next = null;
+
 
 //        Node temp1 = mergeLink(link1.header,link2.header);
 
         int n = 2;
 //        Node temp1 = deletePointNode(link1.header,2);
 //        Node temp1 = reserveLink(link.header,n);
-//        Node temp1 =reverse1(link1.header);
+        Node temp1 =reverse2(link1.header);
 //        Node temp1 = findLastOne(link.header);
 //        Node temp1 = findMidNode(link1.header);
 
-//        printNode(temp1);
-        Boolean isCycle=checkCycle(link1.header);
-
-        Node node = getMeetNod(link1.header);
-
-        System.out.println(node.value);
+        printNode(temp1);
+//        Boolean isCycle=checkCycle(link1.header);
+//
+//        Node node = getMeetNod(link1.header);
+//
+//        System.out.println(node.value);
 
     }
 
@@ -128,7 +134,7 @@ public class LinkTest {
         return pre;
     }
 
-    //非递归反转
+    //递归反转
     private static Node reverse1(Node node) {
         Node pre = null;
         if (node == null || node.next == null){
@@ -138,6 +144,18 @@ public class LinkTest {
             node.next.next=node;
             node.next = null;
             pre =temp;
+        }
+        return pre;
+    }
+
+    //非递归反转
+    private static Node reverse2(Node node){
+        Node pre = null;
+        while (node!=null){
+            Node temp =node;
+            node = node.next;
+            temp.next = pre;
+            pre = temp;
         }
         return pre;
     }
@@ -167,7 +185,7 @@ public class LinkTest {
         link.addNode(node4);
         link.addNode(node5);
         link.addNode(node6);
-        node6.next=node3;
+//        node6.next=node3;
         return link;
     }
     private static LinkTest createLink1() {
