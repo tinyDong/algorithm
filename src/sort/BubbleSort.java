@@ -2,17 +2,23 @@ package sort;
 
 import java.util.Arrays;
 
+//https://www.cnblogs.com/shen-hua/p/5424059.html
 public class BubbleSort {
-    static int[] nums = new int[]{11,22,9,8,4,5,1,2};
+    static int[] nums = new int[]{1,22,9,8,4,5,11,2};
 
+
+    public static void swap(int[] arr,int start,int end){
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+    }
 
     private static void bubbleSort(){
-        for (int i = 0; i < nums.length-1; i++) {
-            for (int j = 0; j <nums.length-i-1; j++) {
+        int length = nums.length;
+        for (int i = 0; i <length; i++) {
+            for (int j = 0; j <length-i-1; j++) {
                 if (nums[j]>nums[j+1]){
-                    int temp = nums[j];
-                    nums[j]=nums[j+1];
-                    nums[j+1] = temp;
+                    swap(nums,j,j+1);
                 }
             }
         }
@@ -20,6 +26,7 @@ public class BubbleSort {
 
     private static void insertSort(){
         int length = nums.length;
+
         for (int i = 1; i < length; i++) {
             int value = nums[i];
             int j = i-1;
@@ -30,14 +37,29 @@ public class BubbleSort {
                     break;
                 }
             }
-            nums[j+1]=value;
+            nums[j+1] = value;
         }
     }
 
+    public static void selectSort(){
+        int length = nums.length;
+
+        for (int i = 0; i <length-1; i++) {
+            int k =i;
+            for (int j = k + 1; j <length; j++) {
+                if (nums[k]>nums[j]){
+                    k = j;
+                }
+            }
+            swap(nums,i,k);
+        }
+    }
 
     public static void main(String[] args) {
 //        bubbleSort();
         insertSort();
+//        selectSort();
+//        System.out.println(nums[1]);
         System.out.println( Arrays.toString(nums));
     }
 }
