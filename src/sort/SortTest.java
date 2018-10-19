@@ -3,7 +3,7 @@ package sort;
 import java.util.Arrays;
 
 //https://www.cnblogs.com/shen-hua/p/5424059.html
-public class BubbleSort {
+public class SortTest {
     static int[] nums = new int[]{1,22,9,8,4,5,11,2};
 
 
