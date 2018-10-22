@@ -18,36 +18,83 @@ public class SortTest {
 //        insertSort();
 //        selectSort();
 //        System.out.println(nums[1]);
-        quickSort(nums,0,nums.length-1);
+//        quickSort(nums,0,nums.length-1);
+
+        mergeSort(nums,0,nums.length-1);
         System.out.println( Arrays.toString(nums));
+    }
+
+    private static void mergeSort(int[] nums, int start, int end) {
+        int mid = (start+end)/2;
+        if (start<end){
+            mergeSort(nums,start,mid);
+            mergeSort(nums,mid+1,end);
+            merge(nums,start,mid,end);
+        }
+
+    }
+
+
+    private static void merge(int[] arr, int low, int mid, int high) {
+
+        int[] temp =new int[high-low+1];
+        int before = low;
+        int after = mid + 1;
+        int index = 0;
+
+        while (before<=mid&& after<=high){
+            if (arr[before]<arr[after]){
+                temp[index++] = arr[before++];
+            }else {
+                temp[index++] = arr[after++];
+            }
+        }
+
+        while (before<=mid){
+            temp[index++]=arr[before++];
+        }
+
+        while (after<= high){
+            temp[index++] = arr[after++];
+        }
+
+        int x= 0;
+        while (x<temp.length){
+            arr[low+x]=temp[x++];
+        }
+
     }
 
 
 
 
+
+
+
+
+
+
     public static void quickSort(int[] arr,int start ,int end){
-        if (start>end){
-            return;
-        }
-        int value = arr[(start+end)/2];
-        int low = start;
-        int high = end;
-        while (low<high){
-            while (low<high&&arr[low]<value){
-                low++;
-            }
+      int value = arr[(start+end)/2];
 
-            while (low<high&&arr[high]>value){
-                high--;
-            }
+      int low =start;
+      int high = end;
+      while (low<high){
 
-            if (low<high){
-                swap(arr,low,high);
-            }
+          while (low<high&&arr[low]<value){
+              low++;
+          }
 
-            quickSort(arr,start,low-1);
-            quickSort(arr,low+1,end);
-        }
+          while (low<high&&arr[high]>value){
+              high--;
+          }
+          if (low<high){
+              swap(arr,low,high);
+          }
+          quickSort(arr,start,low);
+          quickSort(arr,low+1,end);
+      }
+
     }
 
 
