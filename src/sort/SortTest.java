@@ -13,6 +13,52 @@ public class SortTest {
         arr[end] = temp;
     }
 
+    public static void main(String[] args) {
+//        bubbleSort();
+//        insertSort();
+//        selectSort();
+//        System.out.println(nums[1]);
+        quickSort(nums,0,nums.length-1);
+        System.out.println( Arrays.toString(nums));
+    }
+
+
+
+
+    public static void quickSort(int[] arr,int start ,int end){
+        if (start>end){
+            return;
+        }
+        int value = arr[(start+end)/2];
+        int low = start;
+        int high = end;
+        while (low<high){
+            while (low<high&&arr[low]<value){
+                low++;
+            }
+
+            while (low<high&&arr[high]>value){
+                high--;
+            }
+
+            if (low<high){
+                swap(arr,low,high);
+            }
+
+            quickSort(arr,start,low-1);
+            quickSort(arr,low+1,end);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     private static void bubbleSort(){
         int length = nums.length;
         for (int i = 0; i <length; i++) {
@@ -53,13 +99,5 @@ public class SortTest {
             }
             swap(nums,i,k);
         }
-    }
-
-    public static void main(String[] args) {
-//        bubbleSort();
-        insertSort();
-//        selectSort();
-//        System.out.println(nums[1]);
-        System.out.println( Arrays.toString(nums));
     }
 }
