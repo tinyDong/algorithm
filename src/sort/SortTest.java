@@ -24,17 +24,17 @@ public class SortTest {
 
         heapSort(nums);
 
-        int k = 0;
-        for (int i = k+1; i < 10; i++) {
-            k= i+1;
-        }
+//        int k = 0;
+//        for (int i = k+1; i < 10; i++) {
+//            k= i+1;
+//        }
         System.out.println( Arrays.toString(nums));
     }
 
 
     public static void heapSort(int []arr){
         int length = arr.length;
-        for (int i = length/2 -1; i >=0; i--) {
+        for (int i = length / 2 -1; i >=0 ; i--) {
             adjustHeap(arr,i,length);
         }
         for (int i = length-1; i >=0; i--) {
@@ -51,60 +51,55 @@ public class SortTest {
      * @param length
      */
     public static void adjustHeap(int []arr,int i,int length){
-        for (int k = 2*i+1;k<length;k=2*k+1){
-            if (k+1<length && arr[k]<arr[k+1]){
+        for (int k = 2*i+1; k <length; k=k*2+1) {
+            if (k+1<length&&arr[k]<arr[k+1]){
                 k++;
             }
             if (arr[k]>arr[i]){
                 swap(arr,k,i);
                 i=k;
-            }else {
-                break;
             }
         }
     }
 
 
 
-    private static void mergeSort(int[] nums, int start, int end) {
+    private static void mergeSort(int[] arr, int start, int end) {
         int mid = (start+end)/2;
         if (start<end){
-            mergeSort(nums,start,mid);
-            mergeSort(nums,mid+1,end);
-            merge(nums,start,mid,end);
+            mergeSort(arr,start,mid);
+            mergeSort(arr,mid+1,end);
+            merge(arr,start,mid,end);
         }
 
     }
 
 
     private static void merge(int[] arr, int low, int mid, int high) {
-
-        int[] temp =new int[high-low+1];
+        int[] temp = new int[high-low+1];
+        int tempIndex =0;
         int before = low;
-        int after = mid + 1;
-        int index = 0;
-
-        while (before<=mid&& after<=high){
+        int after = mid+1;
+        while (before<=mid&&after<=high){
             if (arr[before]<arr[after]){
-                temp[index++] = arr[before++];
+                temp[tempIndex++] = arr[before++];
             }else {
-                temp[index++] = arr[after++];
+                temp[tempIndex++] = arr[after++];
             }
         }
-
         while (before<=mid){
-            temp[index++]=arr[before++];
+            temp[tempIndex++] = arr[before++];
         }
 
-        while (after<= high){
-            temp[index++] = arr[after++];
+        while (after<=high){
+            temp[tempIndex++] = arr[after++];
         }
 
         int x= 0;
         while (x<temp.length){
-            arr[low+x]=temp[x++];
+            arr[low+x]=temp[x];
+            x++;
         }
-
     }
 
 

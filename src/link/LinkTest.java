@@ -150,12 +150,12 @@ public class LinkTest {
 
     //非递归反转
     private static Node reverse2(Node node){
-        Node pre = null;
+        Node pre =null;
         while (node!=null){
-            Node temp =node;
-            node = node.next;
-            temp.next = pre;
-            pre = temp;
+            Node temp = node;
+            node=node.next;
+            temp.next=pre;
+            pre=temp;
         }
         return pre;
     }
