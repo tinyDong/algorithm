@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 //https://www.cnblogs.com/shen-hua/p/5424059.html
 public class SortTest {
-    static int[] nums = new int[]{1,22,9,8,4,5,11,2,99};
+    static int[] nums = new int[]{9,101, 11,1,109,2,4,  22, 99,102,103,104,8,14};
 
 
     public static void swap(int[] arr,int start,int end){
@@ -58,6 +58,8 @@ public class SortTest {
             if (arr[k]>arr[i]){
                 swap(arr,k,i);
                 i=k;
+            }else {
+                break;
             }
         }
     }
