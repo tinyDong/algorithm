@@ -33,9 +33,9 @@ public class SearchTest {
         int high = end;
         while (value!=arr[mid]){
             if (value>arr[mid]){
-                low=mid;
+                low=mid+1;
             }else {
-                high=mid;
+                high=mid-1;
             }
             mid=(low+high)/2;
         }
