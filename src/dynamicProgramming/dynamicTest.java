@@ -7,9 +7,23 @@ public class dynamicTest {
     public static void main(String[] args) {
 
         int result= getMostGold(5,10,new int[]{400,300,550,300,200},new int[]{5,5,2,4,3});
-
         System.out.println(result);
 
+        int result2 = maxGoldRecursion(5,10,new int[]{400,300,550,300,200},new int[]{5,5,2,4,3});
+        System.out.println("2======="+result2);
+
+    }
+
+    static int maxGoldRecursion(int n , int w , int[] g, int[] p){
+        if (n==1){
+            return w<p[n-1]?0:g[n-1];
+        }
+
+        if (w<p[n-1]){
+            return maxGoldRecursion(n-1,w,p,g);
+        }
+
+        return Math.max(maxGoldRecursion(n-1,w,g,p),g[n-1]+ maxGoldRecursion(n-1,w-p[n-1],g,p));
     }
 
 
