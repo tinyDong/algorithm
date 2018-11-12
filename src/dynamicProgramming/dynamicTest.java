@@ -4,6 +4,8 @@ public class dynamicTest {
 
 
 //    https://www.sohu.com/a/153858619_466939
+
+//    https://blog.csdn.net/GD_Hacker/article/details/82189004
     public static void main(String[] args) {
 
         int result= getMostGold(5,10,new int[]{400,300,550,300,200},new int[]{5,5,2,4,3});
