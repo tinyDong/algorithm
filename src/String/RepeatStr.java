@@ -47,6 +47,7 @@ public class RepeatStr {
         System.out.println("========"+result2);
     }
 
+//    https://blog.csdn.net/qq_26286193/article/details/80291718
     private static String longestPalindromeDynamic(String s1)
     {
         char[] chars = s1.toCharArray();
