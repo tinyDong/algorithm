@@ -40,6 +40,48 @@ public class RepeatStr {
     }
 
     public static void main(String[] args) {
-        new RepeatStr().test("abbadddddc");
+        String tsetTr = "abbadddddc";
+        new RepeatStr().test(tsetTr);
+
+        String result2= longestPalindromeDynamic(tsetTr);
+        System.out.println("========"+result2);
+    }
+
+    private static String longestPalindromeDynamic(String s1)
+    {
+        char[] chars = s1.toCharArray();
+
+        int[][] dp = new int[s1.length()][s1.length()];
+        for (int i = 0; i < chars.length; i++) {
+            dp[i][i]=1;
+        }
+
+        int start = 0 ,max =1;
+
+        for (int i = 0; i < chars.length; i++) {
+
+            for (int j = i-1; j >0 ; j--) {
+                if (chars[i]==chars[j]){
+                    if (i-j==1){
+                        dp[j][i]=2;
+                    }else {
+                        if (dp[j+1][i-1]>0){
+                            dp[j][i] = dp[j+1][i-1] + 2;
+                        }else {
+                            dp[j][i]=0;
+                        }
+                    }
+                }else {
+                    dp[j][i]=0;
+                }
+
+                if (dp[j][i]>max){
+                    max = dp[j][i];
+                    start =j;
+                }
+            }
+        }
+
+        return String.copyValueOf(chars,start,max);
     }
 }
