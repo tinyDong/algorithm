@@ -16,9 +16,9 @@ public class dynamicTest {
 
     }
 
-    static int maxGoldRecursion(int n , int w , int[] g, int[] p){
-        if (n==1){
-            return w<p[n-1]?0:g[n-1];
+    private static int maxGoldRecursion(int n, int w, int[] g, int[] p){
+        if (n==0){
+            return w<p[n]?0:g[n];
         }
 
         if (w<p[n-1]){
