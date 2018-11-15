@@ -1,7 +1,11 @@
 package dynamicProgramming;
 
+import java.util.Stack;
+
 //最长公共子序列(Longest Common Subsequence/
 //对于序列S和T，求它们的最长公共子序列。例如X={A,B,C,B,D,A,B}，Y={B,D,C,A,B,A}则它们的lcs是{B,C,B,A}和{B,D,A,B}。求出一个即可。
+//https://blog.csdn.net/qq_31881469/article/details/77892324
+//https://blog.csdn.net/hrn1216/article/details/51534607
 public class lcs {
 
     public static void main(String[] args) {
@@ -9,51 +13,77 @@ public class lcs {
         String str1 = "ABCBDAB";
         String str2 = "BDCABA";
 
-        System.out.println(getLCS(str1.toCharArray(),str2.toCharArray()));
+        getLCS(str1.toCharArray(),str2.toCharArray());
+//        System.out.println();
 
     }
 
     private static int getLCS(char[] char1, char[] char2){
-
-        int[][] dp = new int[char1.length][char2.length];
-
-        for (int i = 0; i < char1.length; i++) {
-            if (char2[0]==char1[i]){
-                dp[i][0]=1;
-            }else {
-                if (i==0){
-                    dp[i][0]=0;
-                }else {
-                    dp[i][0]=dp[i-1][0];
-                }
-
-            }
-        }
-
-        for (int i = 0; i < char2.length; i++) {
-            if (char1[0]==char2[i]){
-                dp[0][i]=1;
-            }else {
-                if (i==0){
-                    dp[0][i]=0;
-                }else {
-                    dp[0][i]=dp[0][i-1];
-                }
-
-            }
-        }
-
-        for (int i = 1; i <char1.length; i++) {
-
-            for (int j = 1; j < char2.length; j++) {
-                if (char1[i]==char2[j]){
-                    dp[i][j] = dp[i-1][j-1]+1;
+        int[][] dp = new int[char1.length+1][char2.length+1];
+        int[] maxSubStr = new int[Math.max(char1.length,char2.length)];
+        for (int i = 0; i <=char1.length; i++) {
+            for (int j = 0; j <= char2.length; j++) {
+                if (i==0||j==0){
+                    dp[i][j]=0;
+                }else if (char1[i-1]==char2[j-1]){
+                    dp[i][j]=dp[i-1][j-1]+1;
                 }else {
                     dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1]);
                 }
             }
         }
-        return dp[char1.length-1][char2.length-1];
+
+        Stack stack = new Stack();
+        int i = char1.length - 1;
+        int j = char2.length - 1;
+
+        while (i>=0&&j>=0){
+            if (char1[i] == char2[j]){
+                stack.push(char1[i]);
+                i--;
+                j--;
+            }else {
+                //如果字符串的字符不同，则在数组中找相同的字符，注意：数组的行列要比字符串中字符的个数大1，因此i和j要各加1
+                if (dp[i][j+1]>dp[i+1][j]){
+                    i--;
+                }else {
+                    j--;
+                }
+            }
+        }
+
+        while(!stack.isEmpty()){//打印输出栈正好是正向输出最大的公共子序列
+            System.out.print(stack.pop());
+        }
+
+        return dp[char1.length][char2.length];
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        while((i >= 0) && (j >= 0)){
+//                if(char1[i] == char2[j]){//字符串从后开始遍历，如若相等，则存入栈中
+//                stack.push(char1[i]);
+//                i--;
+//                j--;
+//                }else{
+//                //如果字符串的字符不同，则在数组中找相同的字符，注意：数组的行列要比字符串中字符的个数大1，因此i和j要各加1
+//                if(dp[i+1][j] > dp[i][j+1]){
+//                j--;
+//                }else{
+//                i--;
+//                }
+//                }
+//                }
