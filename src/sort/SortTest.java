@@ -34,12 +34,14 @@ public class SortTest {
 
     public static void heapSort(int []arr){
         int length = arr.length;
-        for (int i = length / 2 -1; i >=0 ; i--) {
+        for (int i = length / 2 - 1; i >=0 ; i--) {
             adjustHeap(arr,i,length);
         }
-        for (int i = length-1; i >=0; i--) {
+
+        for (int i = length-1; i >=0 ; i--) {
             swap(arr,0,i);
             adjustHeap(arr,0,i);
+
         }
 
     }
@@ -51,13 +53,13 @@ public class SortTest {
      * @param length
      */
     public static void adjustHeap(int []arr,int i,int length){
-        for (int k = 2*i+1; k <length; k=k*2+1) {
-            if (k+1<length&&arr[k]<arr[k+1]){
-                k++;
+        for (int j = 2*i+1; j <length; j=2*i+1) {
+            if (j+1<length && arr[j+1]>arr[j]){
+                j++;
             }
-            if (arr[k]>arr[i]){
-                swap(arr,k,i);
-                i=k;
+            if (arr[j]>arr[i]){
+                swap(arr,i,j);
+                i=j;
             }else {
                 break;
             }
