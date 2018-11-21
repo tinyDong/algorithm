@@ -34,14 +34,13 @@ public class SortTest {
 
     public static void heapSort(int []arr){
         int length = arr.length;
-        for (int i = length / 2 - 1; i >=0 ; i--) {
+        for (int i = length/2-1; i >=0 ; i--) {
             adjustHeap(arr,i,length);
         }
 
         for (int i = length-1; i >=0 ; i--) {
             swap(arr,0,i);
             adjustHeap(arr,0,i);
-
         }
 
     }
@@ -49,17 +48,17 @@ public class SortTest {
     /**
      * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）
      * @param arr
-     * @param i
+     * @param index
      * @param length
      */
-    public static void adjustHeap(int []arr,int i,int length){
-        for (int j = 2*i+1; j <length; j=2*i+1) {
-            if (j+1<length && arr[j+1]>arr[j]){
-                j++;
+    public static void adjustHeap(int []arr,int index,int length){
+        for (int i = 2*index+1; i <length; i=2*index+1) {
+            if (i+1<length&&arr[i+1]>arr[i]){
+                i++;
             }
-            if (arr[j]>arr[i]){
-                swap(arr,i,j);
-                i=j;
+            if (arr[i]>arr[index]){
+                swap(arr,i,index);
+                index = i;
             }else {
                 break;
             }
