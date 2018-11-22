@@ -38,24 +38,7 @@ public class ShortestPath {
 
 
     private static int[][] buildArr() {
-        int[][] baseArr = new int[4][4];
-        baseArr[0][0]=1;
-        baseArr[0][1]=3;
-        baseArr[0][2]=5;
-        baseArr[0][3]=9;
-        baseArr[1][0]=8;
-        baseArr[1][1]=1;
-        baseArr[1][2]=3;
-        baseArr[1][3]=4;
-        baseArr[2][0]=5;
-        baseArr[2][1]=0;
-        baseArr[2][2]=6;
-        baseArr[2][3]=1;
-        baseArr[3][0]=8;
-        baseArr[3][1]=8;
-        baseArr[3][2]=4;
-        baseArr[3][3]=0;
-        return baseArr;
+        return new int[][]{{1,3,5,9},{8,1,3,4},{5,0,6,1},{8,8,4,0}};
     }
 
 }
