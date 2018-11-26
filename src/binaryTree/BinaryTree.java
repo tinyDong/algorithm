@@ -1,5 +1,7 @@
 package binaryTree;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryTree {
@@ -72,11 +74,30 @@ public class BinaryTree {
 //        System.out.println("========");
 //        bT.noRecMidOrder(bT.root);
 //
-        bT.afterOrder(bT.root);
-        System.out.println("========");
-        bT.nonRecPostOrder(bT.root);
-//        bT.layerOrder(bT.root);
+//        bT.afterOrder(bT.root);
+//        System.out.println("========");
+//        bT.nonRecPostOrder(bT.root);
+        bT.layerOrder(bT.root);
 //        System.out.println(bT.level(bT.root));
+    }
+
+    private void layerOrder(TreeNode header) {
+        if (header==null){
+            return;
+        }
+        Queue<TreeNode> queue =new ArrayDeque<>();
+        queue.add(header);
+        while (!queue.isEmpty()){
+            header = queue.poll();
+            visited(header);
+            if (header!=null&&header.leftChild!=null){
+                queue.add(header.leftChild);
+            }
+            if (header!=null&&header.rightChild!=null){
+                queue.add(header.rightChild);
+            }
+        }
+
     }
 
     private void nonRecPostOrder(TreeNode header) {
