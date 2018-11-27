@@ -62,12 +62,13 @@ public class BinaryTree {
         public static void main(String[] args) {
         BinaryTree bT=new BinaryTree();
         bT.createBinaryTree(bT.root);
-//        bT.preOrder(bT.root);
-//        System.out.println("=========");
+
 //        bT.midOrder(bT.root);
 //        System.out.println("=========");
 //        bT.afterOrder(bT.root);
-//        System.out.println("========");
+
+//        bT.preOrder(bT.root);
+//        System.out.println("=========");
 //        bT.nonRecPreOrder(bT.root);
 
 //        bT.midOrder(bT.root);
@@ -77,88 +78,88 @@ public class BinaryTree {
 //        bT.afterOrder(bT.root);
 //        System.out.println("========");
 //        bT.nonRecPostOrder(bT.root);
+
         bT.layerOrder(bT.root);
 //        System.out.println(bT.level(bT.root));
     }
 
-    private void layerOrder(TreeNode header) {
-        if (header==null){
+    private void layerOrder(TreeNode root) {
+        if (root==null){
             return;
         }
-        Queue<TreeNode> queue =new ArrayDeque<>();
-        queue.add(header);
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
         while (!queue.isEmpty()){
-            header = queue.poll();
-            visited(header);
-            if (header!=null&&header.leftChild!=null){
-                queue.add(header.leftChild);
+            TreeNode node =((ArrayDeque<TreeNode>) queue).pop();
+            visited(node);
+            if (node.leftChild!=null){
+                queue.add(node.leftChild);
             }
-            if (header!=null&&header.rightChild!=null){
-                queue.add(header.rightChild);
+            if (node.rightChild!=null){
+                queue.add(node.rightChild);
             }
         }
-
     }
 
-    private void nonRecPostOrder(TreeNode header) {
-        if (header==null){
+    private void nonRecPostOrder(TreeNode root) {
+        if (root==null){
             return;
         }
-
         Stack<TreeNode> stack = new Stack<>();
         Stack<TreeNode> resultStack = new Stack<>();
-        stack.push(header);
+        stack.push(root);
         while (!stack.isEmpty()){
-            header = stack.pop();
-            resultStack.push(header);
-            if (header.leftChild!=null){
-                stack.push(header.leftChild);
+            root = stack.pop();
+            resultStack.push(root);
+            if (root.leftChild!=null){
+                stack.push(root.leftChild);
             }
-            if (header.rightChild!=null){
-                stack.push(header.rightChild);
+            if (root.rightChild!=null){
+                stack.push(root.rightChild);
             }
         }
         while (!resultStack.isEmpty()){
             visited(resultStack.pop());
         }
-
     }
 
-    private void noRecMidOrder(TreeNode header) {
-        if (header==null){
+    private void noRecMidOrder(TreeNode root) {
+        if (root==null){
             return;
         }
         Stack<TreeNode> stack = new Stack<>();
-        while (!stack.isEmpty()||header!=null){
-            if (header!=null){
-                stack.push(header);
-                header = header.leftChild;
+        while (!stack.isEmpty()||root!=null){
+            if (root!=null){
+                stack.push(root);
+                root = root.leftChild;
             }else {
-                header = stack.pop();
-                visited(header);
-                header = header.rightChild;
+                root = stack.pop();
+                visited(root);
+                root = root.rightChild;
             }
         }
     }
 
 
 
-    private void nonRecPreOrder(TreeNode header) {
-        if (header==null){
+    private void nonRecPreOrder(TreeNode root) {
+        if (root==null){
             return;
         }
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(header);
+
+        Stack<TreeNode> stack =new Stack<>();
+        stack.push(root);
         while (!stack.isEmpty()){
-            header = stack.pop();
-            visited(header);
-            if (header.rightChild!=null){
-                stack.push(header.rightChild);
+            root = stack.pop();
+            visited(root);
+            if (root.rightChild!=null){
+                stack.push(root.rightChild);
             }
-            if (header.leftChild!=null){
-                stack.push(header.leftChild);
+            if (root.leftChild!=null){
+                stack.push(root.leftChild);
             }
         }
+
     }
 
 
