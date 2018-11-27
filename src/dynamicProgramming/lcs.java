@@ -20,31 +20,31 @@ public class lcs {
 
     private static void getLCS(char[] char1, char[] char2){
 
-        int[][] dp =new int[char1.length+1][char2.length+1];
+        int dp[][] =new int[char1.length+1][char2.length+1];
 
         for (int i = 0; i <= char1.length; i++) {
-            for (int j = 0; j <=char2.length; j++) {
-                if (i==0||j==0){
+            for (int j = 0; j <= char2.length; j++) {
+                if (i==0 || j ==0){
                     dp[i][j]=0;
                 }else if (char1[i-1]==char2[j-1]){
-                    dp[i][j]= dp[i-1][j-1]+1;
+                    dp[i][j] = dp[i-1][j-1]+1;
                 }else {
-                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+                    dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1]);
                 }
             }
         }
-
         System.out.println(dp[char1.length][char2.length]);
 
-        Stack stack=new Stack();
+        Stack stack =new Stack();
 
-        int i = char1.length-1 ;
-        int j = char2.length-1 ;
-        while (i>=0&&j>=0){
+        int i = char1.length-1;
+        int j = char2.length-1;
+
+        while (i>=0 && j>=0){
             if (char1[i]==char2[j]){
                 stack.push(char1[i]);
-                j--;
                 i--;
+                j--;
             }else if (dp[i+1][j]>dp[i][j+1]){
                 j--;
             }else {
@@ -54,7 +54,6 @@ public class lcs {
         while (!stack.isEmpty()){
             System.out.println(stack.pop());
         }
-
     }
 
 
