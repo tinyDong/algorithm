@@ -26,40 +26,25 @@ public class RebuildBinaryTree7 {
 
     }
 
-    /**
-     *
-     * @param pre  前序遍历
-     * @param in    中序遍历
-     * @return        二叉树根节点
-     */
-    public static TreeNode reConstructBinaryTree(int[] pre,int[] in) {
-        return construct(pre,0,pre.length-1,in,0,in.length-1);
+    private static TreeNode reConstructBinaryTree(int[] preOrder, int[] inorder) {
+
+        return rebuildTree(preOrder,0,preOrder.length-1,inorder,0,inorder.length-1);
     }
-    /**
-     *
-     * @param pre    前序遍历
-     * @param preStart    前序遍历的开始位置
-     * @param preEnd    前序遍历的结束位置
-     * @param in    中序遍历
-     * @param inStart    中序遍历的开始位置
-     * @param inEnd    中序遍历的结束位置
-     * @return        数的根节点
-     */
-    private static TreeNode construct(int[] pre, int preStart, int preEnd, int[] in, int inStart, int inEnd) {
-        if (preEnd<preStart){
+
+    private static TreeNode rebuildTree(int[] preOrder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd) {
+        if (preStart>preEnd){
             return null;
         }
-        int rootValue = pre[preStart];
-
+        int rootValue = preOrder[preStart];
         int index = inStart;
-        while (inStart<inEnd&&in[index]!=rootValue){
+        while (index<inEnd&&inorder[index]!=rootValue){
             index++;
         }
-        TreeNode root = new TreeNode(rootValue);
-
-        root.leftChild  = construct(pre,preStart+1,preStart+index-inStart,in,inStart,index);
-        root.rightChild = construct(pre,preStart+index-inStart+1,preEnd,in,index+1,inEnd);
-        return root;
+        TreeNode node = new TreeNode(rootValue);
+        node.leftChild = rebuildTree(preOrder,preStart+1,preStart+index-inStart,inorder,inStart,index);
+        node.rightChild = rebuildTree(preOrder,preStart+index-inStart+1,preEnd,inorder,index+1,inEnd);
+        return node;
     }
+
 
 }
