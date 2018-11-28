@@ -11,48 +11,43 @@ public class CoderTest {
 
     public static void main(String[] args) {
 
-//        int result = findWinScore(nums);
+//        int result = win1(nums);
         int result = win2(nums);
+
         System.out.println(result);
     }
 
-    private static int findWinScore(int[] arr) {
-        if (arr==null||arr.length==0){
-            return 0;
+    private static int win2(int[] nums) {
+        int[][] f = new int[nums.length][nums.length];
+        int[][] s = new int[nums.length][nums.length];
+        for (int j = 0; j <nums.length; j++) {
+            f[j][j] = nums[j];
+            for (int i = j-1; i >=0 ; i--) {
+                f[i][j] = Math.max(nums[i] + s[i+1][j],nums[j]+s[i][j-1]);
+                s[i][j] = Math.min(f[i+1][j],f[i][j-1]);
+            }
         }
-        return Math.max(before(arr, 0, arr.length - 1), after(arr, 0, arr.length - 1));
+
+        return Math.max(f[0][nums.length-1],s[0][nums.length-1]);
     }
 
+    private static int win1(int[] nums) {
+        return Math.max(before(nums,0,nums.length-1),after(nums,0,nums.length-1));
+    }
 
-
-    private static int before(int[] arr, int i, int j) {
+    private static int before(int[] arr ,int i,int j){
         if (i==j){
             return arr[i];
         }
-        return Math.max(arr[i] + after(arr,i+1,j),arr[j]+after(arr,i,j-1));
+
+        return Math.max(arr[i] + after(arr,i+1,j),arr[j] + after(arr,i,j-1));
     }
 
-    private static int after(int[] arr, int i, int j) {
+    private static int after(int[] arr ,int i,int j){
         if (i==j){
             return 0;
         }
         return Math.min(before(arr,i+1,j),before(arr,i,j-1));
-    }
-
-    private static int win2(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return 0;
-        }
-        int[][] before = new int[arr.length][arr.length];
-        int[][] after = new int[arr.length][arr.length];
-        for (int j = 0; j < arr.length; j++) {
-            before[j][j] = arr[j];
-            for (int i = j - 1; i >= 0; i--) {
-                before[i][j] = Math.max(arr[i] + after[i + 1][j], arr[j] + after[i][j - 1]);
-                after[i][j] = Math.min(before[i + 1][j], before[i][j - 1]);
-            }
-        }
-        return Math.max(before[0][arr.length - 1], after[0][arr.length - 1]);
     }
 
 
