@@ -21,33 +21,32 @@ public class treeNextNode8 {
 
         TreeNode header = createBinaryTree();
 
-        TreeNode nextNode = findMidOrderNextNode(header.leftChild.rightChild.rightChild);
+        TreeNode nextNode = findMidOrderNextNode(header.leftChild);
 
         System.out.println(nextNode.data);
 
     }
     public static TreeNode findMidOrderNextNode(TreeNode node){
-        if (node==null){
-            return null;
-        }
+      if (node==null){
+          return null;
+      }
 
-        if (node.rightChild!=null){
-            TreeNode next = node.rightChild;
-            while (next.leftChild!=null){
-                next=next.leftChild;
+      if (node.rightChild==null){
+          while (node.parent!=null){
+            TreeNode parent = node.parent;
+            if (parent.leftChild==node){
+                return parent;
             }
-            return next;
-        }else {
-            while (node.parent!=null){
-                TreeNode next = node.parent;
-                if (next.leftChild == node){
-                    return next;
-                }
-                node = node.parent;
-            }
-        }
-
-        return null;
+            node = node.parent;
+          }
+      }else {
+          TreeNode temp = node.rightChild;
+          while (temp.leftChild!=null){
+              temp = temp.leftChild;
+          }
+          return temp;
+      }
+      return null;
     }
 
 
