@@ -30,9 +30,6 @@ public class code3 {
         if (stack==null){
             return;
         }
-        if (stack.isEmpty()){
-            return;
-        }
         Integer value = findAndRemoveLast(stack);
         reserve(stack);
         stack.push(value);
@@ -43,9 +40,9 @@ public class code3 {
         if (stack.isEmpty()){
             return cur;
         }else {
-            Integer value = findAndRemoveLast(stack);
+            Integer last = findAndRemoveLast(stack);
             stack.push(cur);
-            return value;
+            return last;
         }
     }
 
