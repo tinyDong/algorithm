@@ -27,7 +27,7 @@ public class code3 {
     }
 
     private static void reserve(Stack<Integer> stack) {
-        if (stack==null){
+        if (stack==null||stack.isEmpty()){
             return;
         }
         Integer value = findAndRemoveLast(stack);
