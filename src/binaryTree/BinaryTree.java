@@ -87,35 +87,37 @@ public class BinaryTree {
         if (root==null){
             return;
         }
+
         Queue<TreeNode> queue = new ArrayDeque<>();
         queue.add(root);
         while (!queue.isEmpty()){
-            TreeNode temp =((ArrayDeque<TreeNode>) queue).pop();
-            visited(temp);
-            if (temp.leftChild!=null){
-                queue.add(temp.leftChild);
+            root = queue.poll();
+            visited(root);
+            if (root.leftChild!=null){
+                queue.add(root.leftChild);
             }
-            if (temp.rightChild!=null){
-                queue.add(temp.rightChild);
+            if (root.rightChild!=null){
+                queue.add(root.rightChild);
             }
         }
 
     }
 
     private void nonRecPostOrder(TreeNode root) {
-        if (root==null)return;
-
-        Stack<TreeNode> stack =new Stack<>();
+        if (root==null){
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
         Stack<TreeNode> resultStack = new Stack<>();
         stack.push(root);
         while (!stack.isEmpty()){
-            TreeNode temp = stack.pop();
-            resultStack.push(temp);
-            if (temp.leftChild!=null){
-                stack.push(temp.leftChild);
+            root = stack.pop();
+            resultStack.push(root);
+            if (root.leftChild!=null){
+                stack.push(root.leftChild);
             }
-            if (temp.rightChild!=null){
-                stack.push(temp.rightChild);
+            if (root.rightChild!=null){
+                stack.push(root.rightChild);
             }
         }
         while (!resultStack.isEmpty()){
@@ -127,24 +129,24 @@ public class BinaryTree {
         if (root==null){
             return;
         }
-        Stack<TreeNode> stack= new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
         while (!stack.isEmpty()||root!=null){
-            if (root!=null){
+            while (root!=null){
                 stack.push(root);
                 root = root.leftChild;
-            }else {
-                root = stack.pop();
-                visited(root);
-                root = root.rightChild;
             }
+            root = stack.pop();
+            visited(root);
+            root = root.rightChild;
         }
+
     }
 
     private void nonRecPreOrder(TreeNode root) {
         if (root==null){
             return;
         }
-        Stack<TreeNode> stack =new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
         while (!stack.isEmpty()){
             TreeNode temp = stack.pop();
