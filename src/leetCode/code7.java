@@ -17,7 +17,7 @@ public class code7 {
 //        System.out.println(rs);
 //    }
     public static int reverse(int x) {
-        if(x<Integer.MIN_VALUE){
+        if(x==Integer.MIN_VALUE){
             return Integer.MIN_VALUE;
         }
 
