@@ -17,16 +17,15 @@ public class code7 {
 //        System.out.println(rs);
 //    }
     public static int reverse(int x) {
-        if (x == Integer.MIN_VALUE){
-            return x;
+        if(x<Integer.MIN_VALUE){
+            return Integer.MIN_VALUE;
         }
+
         int res = 0;
         int num = Math.abs(x);
         while (num!=0){
-            if (res>Integer.MAX_VALUE){
-                return x>0? Integer.MAX_VALUE:Integer.MIN_VALUE;
-            }
-            res =res*10 +num%10;
+
+            res = num%10 + res*10;
             num = num/10;
         }
         return x>0?res:-res;
