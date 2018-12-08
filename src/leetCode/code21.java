@@ -15,7 +15,21 @@ public class code21 {
     }
 
     private static Node mergeLink(Node header1, Node header2) {
-
+        if (header1==null){
+            return header2;
+        }
+        if (header2==null){
+            return header1;
+        }
+        Node temp = null;
+        if (header1.getValue()<=header2.getValue()){
+            temp=header1;
+            temp.setNext(mergeLink(header1.getNext(),header2));
+        }else {
+            temp=header2;
+            temp.setNext(mergeLink(header2.getNext(),header1));
+        }
+        return temp;
     }
 
 
