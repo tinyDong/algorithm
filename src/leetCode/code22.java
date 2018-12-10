@@ -21,25 +21,43 @@ public class code22 {
     }
 
 
+//    public static List<String> generateParenthesis(int n) {
+//        List<String> list=new ArrayList<>();
+//        String str= "";
+//        generate(list,str,n,n);
+//        return list;
+//    }
+//
+//    private static void generate(List<String> res, String str, int left, int right) {
+//        System.out.println(str);
+//        if (left==0&&right==0){
+//            res.add(str);
+//        }
+//        if (left>0){
+//            generate(res,str+'(',left-1,right);
+//        }
+//        if (right>left){
+//            generate(res,str+')',left,right-1);
+//        }
+//    }
+
     public static List<String> generateParenthesis(int n) {
-        List<String> list=new ArrayList();
-        String str=new String();
-        generate(list,str,n,n);
-        return list;
+        List<String> res = new ArrayList<String>();
+        helper(n, n, "", res);
+        return res;
     }
-    //list的改动是全局性的，但是str每次传递时并不是将本身传给下面，而是str+‘（’或者str+')'传递，所以下一层的改动并不会影响上一层。
-    public static void generate(List<String> list,String str,int left,int right) {
-        System.out.println(str);
-        if (left == 0 && right == 0) {
-            list.add(str);
+    static void helper(int left, int right, String out, List<String> res) {
+        System.out.println(out);
+        if (left < 0 || right < 0 || left > right){
             return;
         }
-        if (left > 0) {
-            generate(list, str + '(', left - 1, right);
+
+        if (left == 0 && right == 0) {
+            res.add(out);
+            return;
         }
-        if (right > left) {
-            generate(list, str + ')', left, right - 1);
-        }
+        helper(left - 1, right, out + "(", res);
+        helper(left, right - 1, out + ")", res);
     }
 
 }
