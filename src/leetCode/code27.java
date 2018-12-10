@@ -32,12 +32,10 @@ public class code27 {
             if (nums[i] != target){
                 i++;
             }else {
-                if (nums[j]==target){
-                    j--;
-                }else {
+                if (nums[j]!=target){
                     nums[i] = nums[j];
-                    j--;
                 }
+                j--;
             }
         }
         return i;
