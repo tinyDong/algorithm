@@ -9,8 +9,8 @@ public class code21 {
 
         Node res = mergeLink(header1,header2);
         while (res!=null){
-            System.out.println(res.getValue());
-            res =res.getNext();
+            System.out.println(res.value);
+            res =res.next;
         }
     }
 
@@ -22,12 +22,12 @@ public class code21 {
             return header1;
         }
         Node temp = null;
-        if (header1.getValue()<=header2.getValue()){
+        if (header1.value<=header2.value){
             temp=header1;
-            temp.setNext(mergeLink(header1.getNext(),header2));
+            temp.next=mergeLink(header1.next,header2);
         }else {
             temp=header2;
-            temp.setNext(mergeLink(header2.getNext(),header1));
+            temp.next=mergeLink(header2.next,header1);
         }
         return temp;
     }
@@ -37,8 +37,8 @@ public class code21 {
         Node root = new Node(1);
         Node node1 = new Node(2);
         Node node2 = new Node(4);
-        root.setNext(node1);
-        node1.setNext(node2);
+        root.next=node1;
+        node1.next=node2;
         return root;
     }
 
@@ -47,8 +47,8 @@ public class code21 {
         Node root = new Node(1);
         Node node1 = new Node(3);
         Node node2 = new Node(4);
-        root.setNext(node1);
-        node1.setNext(node2);
+        root.next=node1;
+        node1.next=node2;
         return root;
     }
 }

@@ -1,25 +1,22 @@
 package leetCode;
 
 public class Node {
-    private Node next ;
-    private Integer value ;
+    public Node next ;
+    public Integer value ;
     public Node(Integer value){
         this.value = value;
     }
 
-    public Node getNext() {
-        return next;
+
+    public static Node createLink() {
+        Node root = new Node(1);
+        Node node1 = new Node(2);
+        Node node2 = new Node(3);
+        Node node3 = new Node(4);
+        root.next =node1;
+        node1.next =node2;
+        node2.next =node3;
+        return root;
     }
 
-    public void setNext(Node next) {
-        this.next = next;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
 }
