@@ -9,32 +9,40 @@ package leetCode;
 //输出: -1
 
 
+import java.util.Arrays;
+
 //https://www.cnblogs.com/yjiyjige/p/3263858.html
 //https://www.cnblogs.com/leavescy/archive/2016/09/19/5884306.html
+//http://www.ruanyifeng.com/blog/2013/05/Knuth–Morris–Pratt_algorithm.html
 public class code28 {
     public static void main(String[] args) {
-        System.out.println(strStr3("hello","ll"));
+        System.out.println(Arrays.toString(getNext("ABCDABD")));
+        System.out.println(strStr3("BBC ABCDAB ABCDABDABDE","ABCDABD"));
+
     }
 
     // KMP算法
     public static int strStr3(String haystack, String needle) {
-
-        char[] char1 = haystack.toCharArray();
-        char[] char2 = needle.toCharArray();
-
-        int i =0;
-        int j = 0;
-
-        while (i<char1.length&&j<char2.length){
-            if (char1[i]==char2[j]){
+        char[] t = haystack.toCharArray();
+        char[] p = needle.toCharArray();
+        int i = 0; // 主串的位置
+        int j = 0; // 模式串的位置
+        int[] next = getNext(needle);
+        while (i < t.length && j < p.length) {
+            if (j == -1 || t[i] == p[j]) { // 当j为-1时，要移动的是i，当然j也要归0
                 i++;
                 j++;
-            }else {
-                i = i-j + 1;
-                j=0;
+            } else {
+                // i不需要回溯了
+                // i = i - j + 1;
+                j = next[j]; // j回到指定位置
             }
         }
-        return j==char2.length ? i-j:-1;
+        if (j == p.length) {
+            return i - j;
+        } else {
+            return -1;
+        }
     }
 
     public static int[] getNext(String ps) {
@@ -45,9 +53,11 @@ public class code28 {
         int k = -1;
         while (j < p.length - 1) {
             if (k == -1 || p[j] == p[k]) {
-                next[j] =k;
-                j++;
-                k++;
+                if (p[++j] == p[++k]) { // 当两个字符相等时要跳过
+                    next[j] = next[k];
+                } else {
+                    next[j] = k;
+                }
             } else {
                 k = next[k];
             }
