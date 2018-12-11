@@ -24,34 +24,21 @@ public class code24 {
     public static Node swapPairs2(Node head) {
         Node res = new Node(-1);
         res.next = head;
-        Node pre_head = res;
-        while (head != null && head.next != null) {
-            Node Node1 = head;
-            Node Node2 = head.next.next;
-            res.next = head.next;
-            res = res.next;
-            res.next = Node1;
-            Node1.next = Node2;
-            res = res.next;
-            head = Node2;
+        Node cur = res;
+        while (cur.next!=null&&cur.next.next!=null){
+            Node first = cur.next;
+            Node second = cur.next.next;
+            first.next = second.next;
+            second.next = first;
+            cur.next = second;
+            cur = cur.next.next;
 
         }
-        return pre_head.next;
+        return res.next;
     }
-//    private static Node swapPairs2(Node header) {
-//
-//        Node cur = new Node(0);
-//        cur.next = header;
-//
-//        while (cur!=null&&cur.next!=null){
-//            Node second = cur.next;
-//            cur.next=cur.next.next;
-//            second.next=cur;
-//            cur = second.next.next;
-//
-//        }
-//        return header;
-//    }
+
+
+
 
     public static Node swapPairs1(Node head) {
         if (head==null||head.next==null){
@@ -66,7 +53,23 @@ public class code24 {
         return temp;
     }
 
-
+//    public static Node swapPairs2(Node head) {
+//        Node res = new Node(-1);
+//        res.next = head;
+//        Node pre_head = res;
+//        while (head != null && head.next != null) {
+//            Node Node1 = head;
+//            Node Node2 = head.next.next;
+//            res.next = head.next;
+//            res = res.next;
+//            res.next = Node1;
+//            Node1.next = Node2;
+//            res = res.next;
+//            head = Node2;
+//
+//        }
+//        return pre_head.next;
+//    }
 
 
 
