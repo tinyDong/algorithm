@@ -22,14 +22,14 @@ public class code34 {
 
     public static void main(String[] args) {
         int[] nums = new int[]{5,5,7,7,8,8,10};
-        System.out.println(Arrays.toString(searchRange1(nums,5)));
+        System.out.println(Arrays.toString(searchRange1(nums,7)));
     }
 
     private static int[] searchRange1(int[] nums, int target) {
         int[] res =new int[]{-1,-1};
         int left = 0, right = nums.length - 1;
 
-        while (left < right) {
+        while (left<right){
             int mid = left + (right-left)/2;
             if (target<=nums[mid]){
                 right = mid;
@@ -45,12 +45,12 @@ public class code34 {
         while (left<right){
             int mid = left + (right-left)/2;
             if (target>=nums[mid]){
-                left = mid+1;
+                left =mid+1;
             }else {
                 right = mid;
             }
         }
-        res[1] = left - 1;
+        res[1] = left-1;
         return res;
     }
 
