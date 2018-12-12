@@ -1,31 +1,12 @@
 package leetCode;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//示例 1:
-//
-//输入: candidates = [2,3,6,7], target = 7,
-//所求解集为:
-//[
-//[7],
-//[2,2,3]
-//]
-//示例 2:
-//
-//输入: candidates = [2,3,5], target = 8,
-//所求解集为:
-//[
-//[2,2,2,2],
-//[2,3,3],
-//[3,5]
-//]
-public class code39 {
-
+public class code40 {
     public static void main(String[] args) {
-        int[] nums = new int[]{2,3,5};
+        int[] nums = new int[]{1,1,2,5,6,7,10};
         int target = 8;
         Arrays.sort(nums);
         System.out.println(combinationSum(nums,target));
@@ -36,20 +17,25 @@ public class code39 {
         return res;
     }
 
-    private static void dfs(List<List<Integer>> res, ArrayList<Integer> subList, int[] nums, int target,int index) {
-        System.out.println(subList);
-        if (getSum(subList)==target){
+    private static void dfs(List<List<Integer>> res, ArrayList<Integer> subList, int[] nums, int target, int index) {
+        System.out.println("index ="+index+"subList = "+subList);
+        if (getSum(subList) ==target){
             res.add(new ArrayList<>(subList));
             return;
         }
 
-        if (getSum(subList)>target){
-            return;
-        }
-
         for (int i = index; i < nums.length; i++) {
+            if (i+1<nums.length&&nums[i]==nums[i+1]){
+                continue;
+            }
             subList.add(nums[i]);
-            dfs(res,subList,nums,target,i);
+            if (getSum(subList)>target){
+                if (!subList.isEmpty()){
+                    subList.remove(subList.size()-1);
+                }
+                return;
+            }
+            dfs(res,subList,nums,target,i+1);
             if (!subList.isEmpty()){
                 subList.remove(subList.size()-1);
             }
