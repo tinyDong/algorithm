@@ -14,8 +14,8 @@ package leetCode;
 public class code27 {
 
     public static void main(String[] args) {
-        int[] nums = new int[]{0,1,2,2,3,0,4,2};
-        int length = removeElement(nums,2);
+        int[] nums = new int[]{3,2,2,3};
+        int length = removeElement(nums,3);
         System.out.println(length);
         System.out.println("-======");
 
@@ -25,19 +25,13 @@ public class code27 {
     }
 
     public static int removeElement(int[] nums, int target) {
-
-        int i =0;
-        int j = nums.length-1;
-        while (i<=j){
+        int res = 0;
+        for (int i = 0; i < nums.length; ++i) {
             if (nums[i] != target){
-                i++;
-            }else {
-                if (nums[j]!=target){
-                    nums[i] = nums[j];
-                }
-                j--;
+                nums[res] = nums[i];
+                res ++;
             }
         }
-        return i;
+        return res;
     }
 }
