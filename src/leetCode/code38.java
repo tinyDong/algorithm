@@ -15,8 +15,36 @@ public class code38 {
     }
 
     private static String countAndSay(int n) {
-       return "";
+        String res = "1";
+
+        while (--n>0){
+            String temp = "";
+            for (int i = 0; i < res.length(); i++) {
+                int count =1;
+                while (i+1<res.length() && res.charAt(i)==res.charAt(i+1)){
+                    count ++;
+                    i++;
+                }
+                temp = temp + count + res.charAt(i);
+            }
+            res = temp;
+        }
+       return res;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
