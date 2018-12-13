@@ -1,7 +1,6 @@
 package leetCode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class code22 {
 // 给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
@@ -20,44 +19,25 @@ public class code22 {
         System.out.println(generateParenthesis(3));
     }
 
-
-//    public static List<String> generateParenthesis(int n) {
-//        List<String> list=new ArrayList<>();
-//        String str= "";
-//        generate(list,str,n,n);
-//        return list;
-//    }
-//
-//    private static void generate(List<String> res, String str, int left, int right) {
-//        System.out.println(str);
-//        if (left==0&&right==0){
-//            res.add(str);
-//        }
-//        if (left>0){
-//            generate(res,str+'(',left-1,right);
-//        }
-//        if (right>left){
-//            generate(res,str+')',left,right-1);
-//        }
-//    }
-
-    public static List<String> generateParenthesis(int n) {
-        List<String> res = new ArrayList<String>();
-        helper(n, n, "", res);
+    private static ArrayList<String> generateParenthesis(int n) {
+        ArrayList<String> res = new ArrayList<>();
+        String temp ="";
+        dfs(n,n,temp,res);
         return res;
     }
-    static void helper(int left, int right, String out, List<String> res) {
-        System.out.println(out);
-        if (left < 0 || right < 0 || left > right){
-            return;
-        }
 
-        if (left == 0 && right == 0) {
-            res.add(out);
+    private static void dfs(int left, int right, String temp, ArrayList<String> res) {
+        if (left==0 &&right ==0){
+            res.add(temp);
             return;
         }
-        helper(left - 1, right, out + "(", res);
-        helper(left, right - 1, out + ")", res);
+        if (left<0||right<0||right<left){
+            return;
+        }
+        dfs(left-1,right,temp+"(",res);
+        dfs(left,right-1,temp+")",res);
+
     }
+
 
 }
