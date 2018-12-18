@@ -4,7 +4,7 @@ package leetCode.code100;
 public class code62 {
 
     public static void main(String[] args) {
-        System.out.println(uniquePaths1(3,7));
+        System.out.println(uniquePaths2(3,3));
     }
 
     public static int uniquePaths2(int m, int n) {
