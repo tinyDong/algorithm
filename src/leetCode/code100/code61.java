@@ -26,28 +26,26 @@ public class code61 {
     public static void main(String[] args) {
         Node head = Node.createLink();
 //        head = rotateRight(head,2);
-        head = rotateRight1(head,4);
+        head = rotateRight1(head,2);
         Node.printNode(head);
     }
 
 
     public static Node rotateRight1(Node head, int k) {
         Node cur = head;
-        int n =1;
+        int n =1 ;
         while (cur.next!=null){
-            ++n;
             cur =cur.next;
+            n++;
         }
         cur.next = head;
-
-        int m = n -k%n;
-        for (int i = 0; i < m ; i++) {
+        int m = n - k%n;
+        for (int i = 0; i < m; i++) {
             cur = cur.next;
-
         }
-        Node temp =cur.next;
-        cur.next=null;
-        return temp;
+        Node res = cur.next;
+        cur.next = null;
+        return res;
     }
 
     public static Node rotateRight(Node head, int n) {
@@ -71,5 +69,22 @@ public class code61 {
         res.next =null;
         return temp;
     }
+
+//    Node cur = head;
+//    int n =1;
+//        while (cur.next!=null){
+//        n++;
+//        cur =cur.next;
+//    }
+//    cur.next = head;
+//
+//    int m = n -k%n;
+//        for (int i = 0; i < m ; i++) {
+//        cur = cur.next;
+//
+//    }
+//    Node temp =cur.next;
+//    cur.next=null;
+//        return temp;
 
 }
