@@ -13,7 +13,7 @@ public class code104 {
         }
         return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
     }
-    
+
 
     public class TreeNode {
         int val;
