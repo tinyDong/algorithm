@@ -9,29 +9,39 @@ package leetCode.code150;
 //
 //前序遍历 preorder = [3,9,20,15,7]
 //中序遍历 inorder = [9,3,15,20,7]
+
+//关键 找到根结点 划分左右子树
 public class code105 {
 
     public static void main(String[] args) {
-
+        int[] preorder =new int[]{3,9,20,15,7};
+        int[] inorder =new int[]{9,3,15,20,7};
+        TreeNode res = buildTree(preorder,inorder);
+        System.out.println(res);
     }
 
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        return helper(preorder,0,preorder.length-1,inorder,0,inorder.length-1);
+    public static TreeNode buildTree(int[] preorder, int[] inorder) {
+
+        return helper(preorder,inorder,0,0,inorder.length-1);
     }
 
-    public TreeNode helper(int[] preorder, int preStart, int preEnd, int[] inorder,int inStart, int inEnd){
-        int rootValue = preorder[preStart];
+    private static TreeNode helper(int[] preorder, int[] inorder,int preIndex,int inStart,int inEnd){
+        if (inEnd<inStart){
+            return null;
+        }
+
+
         int index = inStart;
-        while (index < inEnd && inorder[index]!=rootValue){
+        while (index<inEnd && preorder[preIndex]!=inorder[index]){
             index++;
         }
-        TreeNode root = new TreeNode(rootValue);
-        root.left = helper(preorder,preStart+1,preStart+index - inStart,inorder,inStart,index);
-        root.right = helper(preorder,preStart + index-inStart+1,preEnd,inorder,index+1,inEnd);
-        return root;
+        TreeNode node = new TreeNode(preorder[preIndex]);
+        node.left = helper(preorder,inorder,preIndex+1,inStart,index-1);
+        node.right = helper(preorder,inorder,preIndex+index-inStart+1,index+1,inEnd);
+        return node;
     }
 
-    public class TreeNode {
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
