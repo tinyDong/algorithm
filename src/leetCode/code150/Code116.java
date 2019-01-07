@@ -1,6 +1,6 @@
 package leetCode.code150;
 
-public class Node116 {
+public class Code116 {
 
 
     public static void main(String[] args) {
