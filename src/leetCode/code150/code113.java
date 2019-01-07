@@ -8,7 +8,7 @@ public class code113 {
 
     public static void main(String[] args) {
 //        22
-        TreeUtils.TreeNode root = TreeUtils.stringToTreeNode("5,4,8,11,null,13,4,7,2,null,null,5,1");
+        TreeNode root = TreeUtils.stringToTreeNode("5,4,8,11,null,13,4,7,2,null,null,5,1");
 
         List<List<Integer>> res = pathSum(root,22);
 
@@ -16,13 +16,13 @@ public class code113 {
         System.out.println(result);
     }
 
-    public static List<List<Integer>> pathSum(TreeUtils.TreeNode root, int sum) {
+    public static List<List<Integer>> pathSum(TreeNode root, int sum) {
         List<List<Integer>> res = new ArrayList<>();
         helper(root,new ArrayList<>(),res,sum);
         return res;
     }
 
-    private static void helper(TreeUtils.TreeNode root,List<Integer> subList,List<List<Integer>> res, int sum) {
+    private static void helper(TreeNode root,List<Integer> subList,List<List<Integer>> res, int sum) {
         if (root==null || root.val>sum){
             return;
         }
