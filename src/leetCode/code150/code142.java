@@ -8,11 +8,13 @@ public class code142 {
 
     public ListNode detectCycle(ListNode head) {
 
-
+        if (head==null||head.next==null){
+            return null;
+        }
         ListNode fast = head.next.next;
         ListNode slow = head.next;
 
-        while (fast!=null&&slow!=null&&fast!=slow){
+        while (fast!=null&&fast.next!=null &&slow!=null&&fast!=slow){
             fast = fast.next.next;
             slow = slow.next;
         }
