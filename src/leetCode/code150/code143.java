@@ -8,29 +8,67 @@ package leetCode.code150;
 public class code143 {
 
     public static void main(String[] args) {
+        ListNode head = createLink();
 
+        reorderList(head);
 
+        while (head!=null){
+            System.out.println(head.val);
+            head = head.next;
+        }
     }
 
 
-    public void reorderList(ListNode head) {
+    public static void reorderList(ListNode head) {
+        if (head ==null){
+            return;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast.next!=null && fast.next.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        fast = slow.next;
+        slow.next = null;
+        fast = reservedList(fast);
 
-
+        ListNode cur = head;
+        while (cur!=null&&fast!=null){
+            ListNode temp = cur.next;
+            cur.next = fast;
+            fast = fast.next;
+            cur.next.next = temp;
+            cur = cur.next.next;
+        }
     }
 
-    private ListNode reservedList(ListNode head) {
+    private static ListNode reservedList(ListNode head) {
         if (head==null){
             return null;
         }
         ListNode pre = null;
-        ListNode cur = head;
-        while (cur != null){
-            ListNode temp = cur.next;
-            cur = cur.next;
+        while (head != null){
+            ListNode temp = head;
+            head = head.next;
             temp.next =pre;
             pre =temp;
         }
-       return head;
+        return pre;
+    }
+
+
+    private static ListNode createLink() {
+        ListNode node1= new ListNode(1);
+        ListNode node2= new ListNode(2);
+        ListNode node3= new ListNode(3);
+        ListNode node4= new ListNode(4);
+        ListNode node5= new ListNode(5);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        return node1;
     }
 
 
