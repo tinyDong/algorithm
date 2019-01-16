@@ -8,13 +8,14 @@ public class code168 {
 
     public static String convertToTitle(int n) {
         StringBuilder sb = new StringBuilder();
-        while (n!=0){
 
-            char ch = (char) (n%26 - 1 +'A');
+        while (n!=0){
+            char ch = (char)(n%26 + 'A' - 1);
             sb.append(ch);
             n = n/26;
-            sb.reverse();
         }
+        sb.reverse();
+
         return sb.toString();
     }
 }
