@@ -9,8 +9,8 @@ public class code168 {
     public static String convertToTitle(int n) {
         StringBuilder sb = new StringBuilder();
         while (n!=0){
-            n--;
-            char ch = (char) (n%26+'A');
+
+            char ch = (char) (n%26 - 1 +'A');
             sb.append(ch);
             n = n/26;
             sb.reverse();
