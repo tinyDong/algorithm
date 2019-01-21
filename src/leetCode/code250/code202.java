@@ -1,4 +1,4 @@
-package leetCode.code200;
+package leetCode.code250;
 //示例:
 //
 //输入: 19
