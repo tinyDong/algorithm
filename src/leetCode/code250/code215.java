@@ -3,9 +3,49 @@ package leetCode.code250;
 public class code215 {
     public static void main(String[] args) {
 
-        int[] nums = new int[]{4,3,1,2,6,5};
-        System.out.println(findKthLargest(nums,0));
+        int[] nums = new int[]{7,6,6,5,5,4,3,2,1};
+        System.out.println(findKthLargest1(nums,2));
     }
+
+    private static int findKthLargest1(int[] nums, int k){
+            if (k==0){
+                return 0;
+            }
+            int left = 0 ,right = nums.length-1;
+
+            while (left<right){
+                int pos = partition(nums,left,right);
+                if (pos == k-1){
+                    return nums[pos];
+                }else if (pos > k-1){
+                    right = pos-1;
+                }else {
+                    left = pos +1;
+                }
+            }
+            return nums[left];
+        }
+
+        private static int partition(int[] nums , int start , int end){
+            int pivot = nums[start];
+            int left = start+1 ,right =end;
+            while (left<=right){
+                while (left<nums.length && nums[left]>=pivot){
+                    left++;
+                }
+                while (right>0 && nums[right] <pivot){
+                    right--;
+                }
+
+                if (left<right){
+                    swap(nums,left++,right--);
+                }
+            }
+            swap(nums,start,right);
+            return right;
+        }
+
+
 
     public static int findKthLargest(int[] nums, int k) {
         if (k<0){
