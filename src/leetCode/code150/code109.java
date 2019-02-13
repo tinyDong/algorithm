@@ -4,17 +4,19 @@ public class code109 {
 
 
     public static void main(String[] args) {
-        System.out.println(Short.parseShort("1"));
-
+        ListNode header =createLink();
+        TreeNode root = sortedListToBST(header);
+        System.out.println(root);
     }
 
     public static TreeNode sortedListToBST(ListNode head) {
-
-
         return helper(head,null);
     }
 
     private static TreeNode helper(ListNode head,ListNode tail) {
+        if (head==null||head == tail){
+            return null;
+        }
         ListNode fast = head;
         ListNode slow = head;
         while (fast!=tail && fast.next!=tail){
@@ -42,5 +44,18 @@ public class code109 {
       int val;
       ListNode next;
       ListNode(int x) { val = x; }
+    }
+
+    public static ListNode createLink() {
+        ListNode root = new ListNode(-10);
+        ListNode node1 = new ListNode(-3);
+        ListNode node2 = new ListNode(0);
+        ListNode node3 = new ListNode(5);
+        ListNode node4 = new ListNode(9);
+        root.next =node1;
+        node1.next =node2;
+        node2.next =node3;
+        node3.next = node4;
+        return root;
     }
 }
