@@ -1,7 +1,7 @@
 package jianzhioffer;
 
 import java.util.ArrayList;
-
+//https://www.cnblogs.com/lfeng1205/p/5995711.html
 public class code41 {
     public static void main(String[] args) {
 
