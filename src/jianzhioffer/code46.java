@@ -1,43 +1,27 @@
 package jianzhioffer;
 
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class code46 {
     public static void main(String[] args) {
-        System.out.println(LastRemaining_Solution(5,2));
+        System.out.println(LastRemaining_Solution(6,3));
     }
 
     public static int LastRemaining_Solution(int n, int m) {
-
-        int outCount = 0;
-        boolean[] visted = new boolean[n+1];
-        Arrays.fill(visted,false);
-        int outIndex = m-1;
-        while (outCount!=n){
-            outCount++;
-
-            while (visted[outIndex]){
-                outIndex ++;
-                outIndex = outIndex%n;
-            }
-
-            visted[outIndex] = true;
-
-            outIndex = outIndex%n;
-
-            while (visted[(outIndex +1)%n]){
-                outIndex++;
-                outIndex = outIndex%n;
-            }
-            outIndex = outIndex + m-1;
-            outIndex = outIndex%n;
+        if (n < 1 || m < 1) {
+            return -1;
         }
+        List<Integer> list = new LinkedList<>();
         for (int i = 0; i < n; i++) {
-            if (!visted[i]){
-                return i+1;
-            }
+            list.add(i);
         }
-        return -1;
+        int idx = 0;
+        while (list.size() > 1) {
+             idx = (idx + m-1) % list.size();
+            list.remove(idx);
+        }
+        return list.get(0);
     }
 
 }
